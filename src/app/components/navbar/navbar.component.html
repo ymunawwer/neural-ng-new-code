@@ -1,0 +1,92 @@
+<div class="container">
+
+    <div>
+
+        <span class="contactus" data-toggle="modal" data-target="#exampleModal" >Contact Us</span>
+
+        <!-- <span routerLink="/pitch" class="contactus" style="margin-right: 15px;" >Pitch</span> -->
+
+        <!-- <span routerLink="/api" class="contactus" style="margin-right: 15px;" >Api</span> -->
+
+        <!-- <span routerLink="/" class="contactus" style="margin-right: 15px;" >Home</span> -->
+
+
+    </div>
+
+</div>
+
+<form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contact us</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div>
+
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Name</label>
+                      <input name="name"
+                      [(ngModel)]="contact.name"
+                      type="text" class="form-control" id="name"
+                       aria-describedby="emailHelp"
+                       placeholder="Enter Name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+                       <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+                          <div *ngIf='name.errors.required'>Name is required</div>
+                      </div>
+                      </div>
+
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input name="email" [(ngModel)]="contact.email"
+                     type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                      placeholder="Enter email"  [(ngModel)]="contact.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                        <div *ngIf="email.errors.required">Email is required</div>
+                        <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="exampleInputEmail1">Mobile</label>
+                      <input name="mobile"  [(ngModel)]="contact.mobile"
+                      type="text" class="form-control" id="mobile" aria-describedby="emailHelp"
+                      placeholder="Enter Mobile No"
+                      [(ngModel)]="contact.mobile" #mobile="ngModel" [ngClass]="{ 'is-invalid': f.submitted && mobile.invalid }" required>
+                      <div *ngIf="f.submitted && mobile.invalid" class="invalid-feedback">
+                          <div *ngIf="mobile.errors.required">Mobile is required</div>
+                          <div *ngIf="mobile.errors.email">MObile must be a valid email address</div>
+                      </div>
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your mobile and email with anyone else.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Message</label>
+                        <textarea name="message" [(ngModel)]="contact.message" class="form-control"
+                         id="message" aria-describedby="emailHelp" placeholder="Enter Your Query"
+                         [(ngModel)]="contact.message" #message="ngModel" [ngClass]="{ 'is-invalid': f.submitted && message.invalid }" required></textarea>
+                         <div *ngIf="f.submitted && message.invalid" class="invalid-feedback">
+                            <div *ngIf="message.errors.required">Message is required</div>
+                        </div>
+                      </div>
+
+
+
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>

@@ -1,0 +1,184 @@
+<!-- <div class="jumbotron">
+
+  <h1>Step-1</h1>
+
+  <form>
+
+
+      <div class="form-group">
+
+      Input Features:
+
+      <select (change)="a()" [(ngModel)]="selected_x_features" class="form-control" name="inputFeatures" multiple required>
+
+        <option [ngValue]="item" *ngFor="let item of x_list | keyvalue">{{ item.key }}</option>
+
+      </select>
+
+      <!-- <div class="text-danger" *ngIf="!step1Form.controls.email.valid">This field is required</div> -->
+
+  <!--  </div>
+
+    <div class="form-group">
+
+      Y Feature:
+
+      <select [disabled] = "disableYFeature" class="form-control" name="yFeature" required>
+
+        <option [ngValue]="item" *ngFor="let item of y_list | keyvalue">{{ item.key }}</option>
+
+      </select>
+
+    </div>
+
+
+
+    <div class="form-group">
+
+      <button type="submit" mat-raised-button color="primary">submit</button>
+
+    </div>
+
+
+  </form>
+
+</div> -->
+<ngx-spinner
+  bdColor="rgba(0,0,0,1)"
+  size="medium"
+  color="#fff"
+  type="line-scale">
+ <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="wizard-container">
+    <app-navbar></app-navbar>
+  <div class="container">
+      <div class="header-logo">
+          <img src="assets/img/logo.png">
+      </div>
+      <div class="wizard-card row">
+          <div class="col-md-5 col-sm-6 col-xs-12 left">
+              <div class="content">
+                  <h5>Step 2</h5>
+                  <h3 class="">Select the Features and target variables</h3>
+                  <!-- <h6> you want to predict the Results.</h6> -->
+              </div>
+              <div class="icons">
+                  <img src="assets/img/icon-2.png">
+                  <!-- <i class="fas fa-home icon-color"></i> -->
+              </div>
+              <div class="powered">
+                  <p>Powered By</p>
+                  <img src="assets/img/gamasome-logo.png">
+              </div>
+          </div>
+          <div class="col-md-7 col-sm-6 col-xs-12 right">
+              <h3 class="">Select your request details.</h3>
+
+              <div class="row input-features">
+                  <div class="col-md-6"><label>Select input features</label></div>
+                  <div class="col-md-6" style=" text-align: center;"><label>click to clear features</label></div>
+                  <div class="col-md-5">
+
+                      <select id="undo_redo" (ngModelChange)="selectionMade($event)" [(ngModel)] = "step2Form.x_list" [ngModelOptions]="{standalone: true}"
+                       class="form-control" name="from" multiple="multiple" required>
+
+                          <option [ngValue]="item" *ngFor="let item of x_list | keyvalue">{{ item.value }}</option>
+
+                        </select>
+
+                  </div>
+                  <div class="col-md-2">
+                      <!-- <button type="button" id="undo_redo_undo" class="btn btn-secondary btn-sm btn-block btn-light"><i class="fas fa-undo"></i></button>
+                      <button type="button" id="undo_redo_rightAll" class="btn btn-outline btn-sm btn-block btn-light"><i class="fas fa-forward"></i></button>
+                      <button type="button" id="undo_redo_rightSelected" class="btn btn-outline btn-sm btn-block btn-light"><i class="fas fa-chevron-right"></i></button>
+                      <button type="button" id="undo_redo_leftSelected" class="btn btn-outline btn-sm btn-block btn-light"><i class="fas fa-chevron-left"></i></button>
+                      <button type="button" id="undo_redo_leftAll" class="btn btn-outline btn-sm btn-block btn-light"><i class="fas fa-backward"></i></button>
+                      <button type="button" id="undo_redo_redo" class="btn btn-secondary btn-sm btn-block btn-light"><i class="fas fa-redo"></i></button> -->
+                  </div>
+
+                  <div class="col-md-5">
+
+
+                      <select name="to" id="undo_redo_to" (ngModelChange)="selectionDeleted($event)"
+                      [(ngModel)] = "step2Form.x_list_2" [ngModelOptions]="{standalone: true}"
+                      class="form-control" size="13" multiple="multiple">
+
+                          <option [ngValue]="feature" *ngFor="let feature of selectedXfeatures">{{ feature.value }}
+                          </option>
+
+                      </select>
+
+                  </div>
+              </div>
+              <br>
+              <br>
+              <div class="row">
+                  <div class="col-md-12 col-sm-12 form-group mb-4">
+                      <label for="exampleFormControlSelect1">Target Variable</label>
+
+                      <select id="exampleFormControlSelect1" [(ngModel)] = "step2Form.y_list" [ngModelOptions]="{standalone: true}"
+
+                       (ngModelChange)="showAlgo($event)"  class="form-control" name="yFeature" required>
+
+                       <option value="0"></option>
+
+                        <option [ngValue]="item" *ngFor="let item of y_list | keyvalue  ">{{ item.value }}</option>
+
+                      </select>
+
+                  </div>
+
+                  <div class="col-md-12 col-sm-12 form-group mb-4">
+
+                  <label for="exampleFormControlSelect1">How you want to predict?</label>
+
+                  </div>
+
+                  <div class="col-md-6 col-sm-12 form-group mb-4">
+                    <div class="radio-toolbar">
+                      <input type="radio" id="radio1" [(ngModel)] = "step2Form.prediction_type" [ngModelOptions]="{standalone: true}" name="prediction_type" value="custom" checked>
+                      <label class="labelStyle" for="radio1">Customize Algorithms</label>
+                  </div>
+
+                </div>
+
+                <div class="col-md-6 col-sm-12 form-group mb-4">
+                  <div class="radio-toolbar">
+                    <input type="radio" id="radio2" [(ngModel)] = "step2Form.prediction_type" [ngModelOptions]="{standalone: true}" name="prediction_type" value="auto">
+                    <label class="labelStyle" for="radio2">Auto AI</label>
+                </div>
+
+              </div>
+
+                  <!-- <div class="col-md-6 col-sm-12 form-group mb-4">
+                      <label for="exampleFormControlSelect1">Algorithm</label>
+                      <select id="exampleFormControlSelect2" [(ngModel)] = "step2Form.algo" [ngModelOptions]="{standalone: true}" [disabled]="disableAlgo" class="form-control" name="algo" required>
+
+                        <option [ngValue]="item" *ngFor="let item of algo">{{ item }}</option>
+
+                      </select>
+                  </div>
+                  <div class="col-md-6 col-sm-12 form-group mb-4">
+                      <label for="exampleFormControlSelect1">Split Value</label>
+                      <select id="exampleFormControlSelect3" [(ngModel)] = "step2Form.tt_split" [ngModelOptions]="{standalone: true}" [disabled]="disableAlgo" class="form-control" name="tt_split" required>
+
+                        <option [ngValue]="item" *ngFor="let item of tt_split">{{ item }}
+                        </option>
+
+                      </select>
+                  </div> -->
+              </div>
+              <br>
+              <div class="btm-btn">
+                  <a [routerLink]="['/']" class="btn btn-secondary">Previous</a>
+                  <button (click)="save()" class="btn btn-primary next">Next</button>
+              </div>
+          </div>
+      </div>
+      <div class="copyrights">
+          <p>&copy; 2018 Neuralzome.com All Rights Reserved</p>
+      </div>
+  </div>
+</div>

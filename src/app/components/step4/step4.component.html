@@ -1,0 +1,122 @@
+<ngx-spinner
+  bdColor="rgba(0,0,0,1)"
+  size="medium"
+  color="#fff"
+  type="line-scale">
+ <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<app-navbar></app-navbar>
+
+<div class="wizard-container">
+    <app-navbar></app-navbar>
+  <div class="container">
+      <div class="header-logo">
+          <img src="assets/img/logo.png">
+      </div>
+      <div class="wizard-card row">
+          <div class="col-md-5 col-sm-6 col-xs-12 left">
+              <div class="content">
+                  <h5>Step 4</h5>
+                  <h3 class="">Give us some detsils to get the predicted results</h3>
+                  <!-- <h6>Give us some detsils to get the predicted results</h6> -->
+              </div>
+              <div class="icons">
+                  <img src="assets/img/icon-4.png">
+                  <!-- <i class="fas fa-home icon-color"></i> -->
+              </div>
+              <div class="powered">
+                  <p>Powered By</p>
+                  <img src="assets/img/gamasome-logo.png">
+              </div>
+          </div>
+          <div class="col-md-7 col-sm-6 col-xs-12 right btm-border">
+              <!-- <h3 class="mb-3">Taylor it for yourself with Neuralzome.</h3> -->
+              <div class="form-row align-items-center">
+                  <div class="col-md-5 col-sm-5 col-xs-12">
+                      <div class="form-group mb-3">
+                          <label>Enter Your Email</label>
+                          <input [disabled]="true" type="text" [(ngModel)] = "email" class="form-control" placeholder="Email">
+                      </div>
+                  </div>
+                  <div class="col-md-4 col-sm-4 col-xs-12">
+                      <div class="form-group mb-3">
+                          <label>Enter Your Model ID</label>
+                          <input [disabled]="true" type="text" [(ngModel)] = "modelId" class="form-control" placeholder="ID">
+                      </div>
+                  </div>
+                  <!-- <div class="col-md-3 col-sm-3 col-xs-12">
+                      <label></label>
+                      <a href="" class="btn btn-secondary btn-sm btn-block btn-light">Submit</a>
+                  </div> -->
+              </div>
+              <hr>
+              <h3 class="mb-3 sm">Accurancy Result : <span class="float-right">{{ accuracy }}</span></h3>
+              <form #myForm="ngForm">
+              <div class="form-row align-items-center">
+
+                <div *ngFor="let featureName of finalFeatureNames" class="col-md-6 col-sm-6 col-xs-12">
+                      <div class="form-group mb-3">
+                          <label>Enter {{ featureName.featureName }}</label>
+                          <input (keyup)="makeJsonStructure(myForm)" [name]="featureName.featureName" [ngModel]="inputFeatures"
+                          type="text" class="form-control" placeholder="{{ featureName.featureName }}(eg: {{featureName.hint}})" required>
+                      </div>
+                  </div>
+
+
+
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                      <label></label>
+                      <button (click)="predict(myForm)" class="btn btn-secondary btn-sm btn-block">Submit</button>
+                      <button #jsonButton type="button" class="btn btn-info" (click)="makeJsonStructure(myForm)" style = "display: none">Get My Json</button>
+
+                  </div>
+              </div>
+            </form>
+              <h3 class="mb-3 sm">Result : <span class="float-right">{{ finalResult }}</span></h3>
+              <hr>
+              <h3 class="mb-3 sm">Request URL :</h3>
+              <h6 class="mb-3 xs"><strong>http://13.58.82.47:3000/neuralZome/getDetailsForStep4</strong></h6>
+
+          </div>
+
+          <div class="col-md-12">
+              <br>
+              <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="box item-to-copy">
+                          <div class="head">
+                              <h5>Request Body</h5>
+                              <button class="copy request-copy" data-text="COPY" data-text-copied="COPIED">
+                                  <i class="fas fa-copy"></i>
+                                  <span>COPY</span>
+                              </button>
+                          </div>
+                          <div class="inner">
+                              <pre class="text-to-copy">{{ myJson | json }}</pre>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                      <div class="box item-to-copy1">
+                          <div class="head">
+                              <h5>Response Body</h5>
+                              <button class="copy request-copy1" data-text="COPY" data-text-copied="COPIED">
+                                  <i class="fas fa-copy"></i>
+                                  <span>COPY</span>
+                              </button>
+                          </div>
+                          <div class="inner">
+                              <pre class="text-to-copy1">{{resultResponse | json}}</pre>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br>
+          </div>
+      </div>
+      <div class="copyrights">
+          <p>&copy; 2018 Neuralzome.com All Rights Reserved</p>
+      </div>
+  </div>
+</div>

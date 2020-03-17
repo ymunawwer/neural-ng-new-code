@@ -1,0 +1,29 @@
+.btn-primary {
+
+  border-radius: 3px;
+    background: #232526;
+    /* padding: 7px 15px; */
+    font-weight: 900;
+    font-size: 0.8em;
+    border: 0;
+    text-align: center;
+    box-shadow: none;
+    outline: none;
+
+}
+
+.top-row-div {
+  margin-bottom: 2em
+}
+
+.divinsideTable {
+
+margin: 15px
+
+}
+
+.tableRowStyle {
+
+padding: 10px 25px;
+
+}

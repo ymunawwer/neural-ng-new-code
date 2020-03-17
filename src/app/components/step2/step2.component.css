@@ -1,0 +1,27 @@
+.radio-toolbar label {
+  display: inline-block;
+  padding: 4px 11px;
+  font-family: Arial;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: transparent;
+  border: solid 2px black;
+  border-radius: 8px;
+  text-align: center;
+  color: black;
+}
+
+.radio-toolbar input[type="radio"]:checked+label {
+  background-color: black;
+  color: white;
+}
+
+.radio-toolbar input[type="radio"] {
+  display: none;
+}
+
+.labelStyle {
+
+  font-size: 0.9em !important;
+
+}

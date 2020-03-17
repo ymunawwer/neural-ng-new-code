@@ -1,0 +1,145 @@
+<ngx-spinner
+  bdColor="rgba(0,0,0,1)"
+  size="medium"
+  color="#fff"
+  type="line-scale">
+ <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+
+<div class="wizard-container">
+    <app-navbar></app-navbar>
+ <div class="container">
+     <div class="header-logo">
+         <img src="assets/img/logo.png">
+     </div>
+     <div class="wizard-card row">
+         <div class="col-md-5 col-sm-6 col-xs-12 left">
+             <div class="content">
+                 <h5>Leader Board</h5>
+                 <h3 class="">Select your Algorithm and Parameters</h3>
+             </div>
+             <div class="icons">
+              <img src="assets/img/icon-2.png">
+                 <!-- <i class="fas fa-home icon-color"></i> -->
+             </div>
+             <div class="powered">
+                 <p>Powered By</p>
+                 <img src="assets/img/gamasome-logo.png">
+             </div>
+         </div>
+
+         <div class="col-md-7 col-sm-6 col-xs-12 right">
+          <form #leader="ngForm" (ngSubmit)="onSubmit(leader)" novalidate>
+
+          <div class="row top-row-div">
+
+            <div class="col-md-6">
+            <span>Split value</span>
+            <select name="sending_tt_split" [(ngModel)]='sending_tt_split' class="form-control">
+              <option *ngFor="let item of tt_split; let i = index" [selected]="i === 0">{{ item }}</option>
+            </select>
+          </div>
+          <div class="col-md-6" style="text-align: right; position: relative;">
+
+            <div style="
+            position: absolute;
+            top: 39%;
+            text-align: right;
+            right: 18px;
+            ">
+
+            <button type="submit"  class="btn btn-primary">Re Build</button>
+            <button type="button" (click)="deploy()" style="margin-left: 10px" class="btn btn-primary">Publish</button>
+
+            </div>
+
+          </div>
+          </div>
+
+
+          <table bordercolor=#f5f6f8 border="5" style="width:100%;">
+
+            <tr>
+              <th style = "text-align: center" width="75%">Algorithm</th>
+              <th style = "text-align: center" width="15%">Accuracy</th>
+              <th style = "text-align: center" width="10%">Deploy</th>
+            </tr>
+
+              <tr *ngFor="let algo of finalAlgorithms ">
+
+
+                <td>
+
+                    <div class="row">
+                      <div class="col-md-12 tableRowStyle">
+                       <input style="float: left" name={{algo[0]}} ngModel class="form-check-inline form-check" type="checkbox">
+                       <span style="font-weight: bolder" class="form-check-label">
+                        {{algo[0]}}
+                      </span><span style="float: right;" data-toggle="collapse" [attr.data-target]="'#' + algo[0]" ><i class="fas fa-angle-down"></i></span>
+                      </div>
+                    </div>
+
+                  <div [attr.id] = "algo[0]" class="collapse divinsideTable">
+
+                    <fieldset>
+                    <div class="row">
+
+                      <div *ngFor="let input of algo[1].hyperparameters" class="col-md-6">
+                        <label  *ngIf="input.type === 'list'" > {{ input.name }} </label>
+                        <select name="{{algo[0] + input.name}}"  [ngModel]="formValues" *ngIf="input.type === 'list'"
+                        class="form-control" >
+
+                          <option *ngFor="let val of input.pval">{{ val }}</option>
+
+                        </select>
+
+                        <label *ngIf="input.type === 'range'" > {{ input.name }} </label>
+
+
+                        <input name="{{ algo[0] + input.name }}" [ngModel]="formValues"  min="1" [attr.min]="input.minval" [attr.max] = "input.pval" class="form-control" *ngIf="input.type === 'range'"
+                         type="range" >
+
+
+                      </div>
+
+                    </div>
+                  </fieldset>
+
+
+                    </div>
+                </td>
+
+                <td>
+                      {{ algo[1].accuracy}}
+                </td>
+
+                 <td>
+
+                    <input name='selectAlgo' [value]="algo[0]" (change)="onSelectionChange(algo)"  type="radio" class="form-control">
+
+                 </td>
+
+              </tr>
+
+          </table>
+
+
+                <!-- <button type="submit">Save</button> -->
+
+              </form>
+
+              <div style="margin-top: 3em" class="btm-btn">
+                <a [routerLink]="['/step2']" class="btn btn-secondary">Previous</a>
+            </div>
+
+         </div>
+
+
+
+     </div>
+     <div class="copyrights">
+         <p>&copy; 2018 Neuralzome.com All Rights Reserved</p>
+     </div>
+ </div>
+</div>
